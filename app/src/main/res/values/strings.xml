@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BatteryGuard</string>
+
+    <string name="label_min">MINIMUM — plug in below this</string>
+    <string name="label_max">MAXIMUM — unplug above this</string>
+
+    <string name="current_battery">Battery: %d%%</string>
+    <string name="current_battery_placeholder">Battery: —</string>
+
+    <string name="service_on">Monitoring active</string>
+    <string name="service_off">Monitoring off</string>
+
+    <string name="alert_low_title">Plug in</string>
+    <string name="alert_low_message">Battery at %d%%</string>
+    <string name="alert_high_title">Unplug</string>
+    <string name="alert_high_message">Battery at %d%%</string>
+    <string name="alert_dismiss_hint">TAP ANYWHERE TO DISMISS</string>
+
+    <string name="label_test">TEST ALERT</string>
+    <string name="test_hint">0–100</string>
+    <string name="test_button">Simulate</string>
+
+    <string name="label_alert_options">ALERT OPTIONS</string>
+    <string name="label_sound">Sound</string>
+    <string name="label_vibration">Vibration</string>
+
+    <string name="notif_channel_monitor_name">Battery Monitor</string>
+    <string name="notif_channel_monitor_desc">Monitors battery level thresholds</string>
+    <string name="notif_channel_alert_name">Battery Alert</string>
+    <string name="notif_monitor_title">BatteryGuard active</string>
+    <string name="notif_monitor_text">Watching battery thresholds</string>
+
+    <string name="snooze_active">⏸ Alert snoozed for 30 min — tap to clear</string>
+</resources>

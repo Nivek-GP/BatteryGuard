@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_dark">#0D0D0D</color>
+    <color name="text_primary">#F0F0F0</color>
+    <color name="text_secondary">#888888</color>
+    <color name="text_hint">#555555</color>
+    <color name="divider">#1E1E1E</color>
+    <color name="track_inactive">#2A2A2A</color>
+
+    <!-- Amber for low battery alert -->
+    <color name="accent_low">#FFA726</color>
+    <!-- Red for high battery alert -->
+    <color name="accent_high">#EF5350</color>
+
+    <!-- Alert backgrounds -->
+    <color name="alert_low_bg">#1A1200</color>
+    <color name="alert_high_bg">#1A0000</color>
+</resources>

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_dark"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:paddingBottom="24dp">
+
+        <ImageView
+            android:id="@+id/appLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/appTitle" />
+
+        <TextView
+            android:id="@+id/appTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textColor="@color/text_primary"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-light"
+            android:letterSpacing="0.1"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/appLogo" />
+
+        <TextView
+            android:id="@+id/currentBattery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/current_battery_placeholder"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            app:layout_constraintTop_toTopOf="@id/appTitle"
+            app:layout_constraintBottom_toBottomOf="@id/appTitle"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/appTitle"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Min slider -->
+        <TextView
+            android:id="@+id/labelMin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_min"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:letterSpacing="0.06"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderMin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            app:trackColorActive="@color/accent_low"
+            app:trackColorInactive="@color/track_inactive"
+            app:thumbColor="@color/accent_low"
+            app:labelBehavior="floating"
+            app:layout_constraintTop_toBottomOf="@id/labelMin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Max slider -->
+        <TextView
+            android:id="@+id/labelMax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_max"
+            android:textColor="@color/text_secondary"
+            android:textSize="11sp"
+            android:letterSpacing="0.06"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/sliderMin"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderMax"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            app:trackColorActive="@color/accent_high"
+            app:trackColorInactive="@color/track_inactive"
+            app:thumbColor="@color/accent_high"
+            app:labelBehavior="floating"
+            app:layout_constraintTop_toBottomOf="@id/labelMax"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Toggle row -->
+        <TextView
+            android:id="@+id/toggleLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/service_off"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/sliderMax"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/toggleService"
+            app:layout_constraintBottom_toBottomOf="@id/toggleService" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/toggleService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/sliderMax"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Snooze banner — visible only when a real alert was dismissed and snooze is active -->
+        <TextView
+            android:id="@+id/snoozeBanner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/snooze_active"
+            android:textColor="@color/accent_low"
+            android:textSize="11sp"
+            android:letterSpacing="0.05"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/toggleService"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Alert options section -->
+        <TextView
+            android:id="@+id/labelAlertOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_alert_options"
+            android:textColor="@color/text_hint"
+            android:textSize="10sp"
+            android:letterSpacing="0.1"
+            android:layout_marginTop="16dp"
+            app:layout_goneMarginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/snoozeBanner"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/labelSoundLeft"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/label_sound"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/labelAlertOptions"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/switchSound"
+            app:layout_constraintBottom_toBottomOf="@id/switchSound" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchSound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/labelAlertOptions"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/labelVibrationLeft"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/label_vibration"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/switchSound"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/switchVibration"
+            app:layout_constraintBottom_toBottomOf="@id/switchVibration" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switchVibration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/switchSound"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Test section — hidden by default, revealed by tapping the app title 10 times -->
+        <View
+            android:id="@+id/dividerTest"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/switchVibration"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/labelTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_test"
+            android:textColor="@color/text_hint"
+            android:textSize="10sp"
+            android:letterSpacing="0.1"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/dividerTest"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/testInputLayout"
+            android:visibility="gone"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:hint="@string/test_hint"
+            app:boxStrokeColor="@color/track_inactive"
+            app:hintTextColor="@color/text_hint"
+            app:layout_constraintTop_toBottomOf="@id/labelTest"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/testInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="3"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:imeOptions="actionGo" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/testButton"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginStart="10dp"
+            android:text="@string/test_button"
+            android:textColor="@color/text_secondary"
+            app:strokeColor="@color/track_inactive"
+            app:layout_constraintTop_toTopOf="@id/testInputLayout"
+            app:layout_constraintBottom_toBottomOf="@id/testInputLayout"
+            app:layout_constraintStart_toEndOf="@id/testInputLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

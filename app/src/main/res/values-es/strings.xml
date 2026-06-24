@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BatteryGuard</string>
+
+    <string name="label_min">MÍNIMO — conectar por debajo de este valor</string>
+    <string name="label_max">MÁXIMO — desconectar por encima de este valor</string>
+
+    <string name="current_battery">Batería: %d%%</string>
+    <string name="current_battery_placeholder">Batería: —</string>
+
+    <string name="service_on">Monitoreo activo</string>
+    <string name="service_off">Monitoreo desactivado</string>
+
+    <string name="alert_low_title">Conecta el cargador</string>
+    <string name="alert_low_message">Batería al %d%%</string>
+    <string name="alert_high_title">Desconecta el cargador</string>
+    <string name="alert_high_message">Batería al %d%%</string>
+    <string name="alert_dismiss_hint">TOCA EN CUALQUIER LUGAR PARA CERRAR</string>
+
+    <string name="label_test">PRUEBA DE ALERTA</string>
+    <string name="test_hint">0–100</string>
+    <string name="test_button">Simular</string>
+
+    <string name="label_alert_options">OPCIONES DE ALERTA</string>
+    <string name="label_sound">Sonido</string>
+    <string name="label_vibration">Vibración</string>
+
+    <string name="notif_channel_monitor_name">Monitor de batería</string>
+    <string name="notif_channel_monitor_desc">Monitorea los umbrales de batería</string>
+    <string name="notif_channel_alert_name">Alerta de batería</string>
+    <string name="notif_monitor_title">BatteryGuard activo</string>
+    <string name="notif_monitor_text">Vigilando los umbrales de batería</string>
+
+    <string name="snooze_active">⏸ Alerta silenciada 30 min — toca para limpiar</string>
+</resources>
