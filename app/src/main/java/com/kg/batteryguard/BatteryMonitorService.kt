@@ -15,6 +15,8 @@ import android.os.IBinder
 class BatteryMonitorService : Service() {
 
     private var lastKnownPercent = -1
+    private var lastKnownPlugged = false
+    private var alertShowing = false
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(ctx: Context, intent: Intent) {
@@ -24,23 +26,42 @@ class BatteryMonitorService : Service() {
                     val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100)
                     if (level < 0) return
                     lastKnownPercent = level * 100 / scale
-                    checkThresholds(lastKnownPercent)
+                    // Any power source connected (USB / AC / wireless) counts as "charging".
+                    lastKnownPlugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0) != 0
+                    checkThresholds(lastKnownPercent, lastKnownPlugged)
                 }
                 Intent.ACTION_SCREEN_ON -> {
-                    if (lastKnownPercent >= 0) checkThresholds(lastKnownPercent)
+                    if (lastKnownPercent >= 0) checkThresholds(lastKnownPercent, lastKnownPlugged)
                 }
             }
         }
     }
 
-    private fun checkThresholds(percent: Int) {
-        if (Prefs.isSnoozed(this)) return
+    private fun checkThresholds(percent: Int, plugged: Boolean) {
         val min = Prefs.getMin(this)
         val max = Prefs.getMax(this)
-        when {
-            percent <= min -> postAlert(AlertActivity.TYPE_LOW, percent)
-            percent >= max -> postAlert(AlertActivity.TYPE_HIGH, percent)
+        // LOW = "charge me": only relevant while running on battery (unplugged).
+        // HIGH = "unplug me": only relevant while charging (plugged in).
+        val low = percent <= min && !plugged
+        val high = percent >= max && plugged
+
+        if (!low && !high) {
+            // Condition cleared — either back in the safe range or the user took the
+            // corrective action (plugged in for LOW, unplugged for HIGH). Stop nagging.
+            clearAlert()
+            return
         }
+
+        if (Prefs.isSnoozed(this)) return
+        postAlert(if (low) AlertActivity.TYPE_LOW else AlertActivity.TYPE_HIGH, percent)
+    }
+
+    /** Cancel any active alert and reset the snooze so a future genuine crossing fires again. */
+    private fun clearAlert() {
+        if (!alertShowing && !Prefs.isSnoozed(this)) return
+        Prefs.clearSnooze(this)
+        getSystemService(NotificationManager::class.java).cancel(ALERT_NOTIF_ID)
+        alertShowing = false
     }
 
     private fun postAlert(type: String, percent: Int) {
@@ -81,6 +102,7 @@ class BatteryMonitorService : Service() {
             .build()
 
         getSystemService(NotificationManager::class.java).notify(ALERT_NOTIF_ID, notification)
+        alertShowing = true
     }
 
     override fun onCreate() {

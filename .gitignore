@@ -8,3 +8,16 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Module build outputs
+app/build/
+build/
+
+# Signing keys / secrets — never commit
+*.jks
+*.keystore
+batteryguard.jks
+
+# Build artifacts
+*.apk
+*.aab
