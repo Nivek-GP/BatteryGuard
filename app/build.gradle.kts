@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -15,8 +17,29 @@ android {
         versionName = "1.0"
     }
 
+    // Signing credentials live in keystore.properties (git-ignored), e.g.:
+    //   storeFile=../batteryguard.jks
+    //   storePassword=...
+    //   keyAlias=...
+    //   keyPassword=...
+    val keystorePropsFile = rootProject.file("keystore.properties")
+    val hasKeystore = keystorePropsFile.exists()
+
+    signingConfigs {
+        if (hasKeystore) {
+            val props = Properties().apply { keystorePropsFile.inputStream().use { load(it) } }
+            create("release") {
+                storeFile = file(props.getProperty("storeFile"))
+                storePassword = props.getProperty("storePassword")
+                keyAlias = props.getProperty("keyAlias")
+                keyPassword = props.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            if (hasKeystore) signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

@@ -12,7 +12,7 @@ Designed for **battery longevity** and **minimal energy use** (event-driven, no
 polling). Setup is two sliders. Bilingual (English / Spanish). Dismiss the alarm
 by touching or swiping the screen.
 
-See [PLAN.md](PLAN.md) for the full design and build/install steps.
+Release signing reads credentials from a local, git-ignored `keystore.properties`.
 
 ## Status
 🚧 Project scaffolding in progress.

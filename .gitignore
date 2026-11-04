@@ -1,23 +1,52 @@
+# --- Android / Gradle ---
 *.iml
-.gradle
+.gradle/
 /local.properties
+local.properties
 /.idea
+.idea/
 .DS_Store
 /build
+build/
+app/build/
 /captures
 .externalNativeBuild
 .cxx
-local.properties
+.kotlin/
 
-# Module build outputs
-app/build/
-build/
-
-# Signing keys / secrets — never commit
+# --- Signing keys / secrets — never commit ---
 *.jks
 *.keystore
 batteryguard.jks
+keystore.properties
+signing.properties
+*.pem
+*.p12
+.env
+.env.*
+google-services.json
 
-# Build artifacts
+# --- Build artifacts ---
 *.apk
 *.aab
+*.ap_
+*.dex
+output-metadata.json
+
+# --- Plans, docs and private notes (keep README public) ---
+PLAN.md
+*PLAN*.md
+TODO.md
+NOTES.md
+notes/
+docs/
+doc/
+*.docx
+*.pdf
+CLAUDE.md
+.claude/
+
+# --- Logs / misc ---
+*.log
+*.hprof
+Thumbs.db
